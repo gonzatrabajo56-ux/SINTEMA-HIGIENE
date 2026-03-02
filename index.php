@@ -3,9 +3,15 @@
 session_start();
 
 // 1. SEGURIDAD: Si no existe sesión y no estamos en el login, redirigir
-// (Esto asume que tienes un login.php independiente)
-if (!isset($_SESSION['usuario_id']) && (!isset($_GET['page']) || $_GET['page'] !== 'login')) {
+$page = $_GET['page'] ?? null;
+if (!isset($_SESSION['usuario_id']) && $page !== 'login') {
     header("Location: login.php");
+    exit();
+}
+
+// Permitir renderizar el login desde el router (sin layout)
+if ($page === 'login') {
+    include 'views/login.php';
     exit();
 }
 
