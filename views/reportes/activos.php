@@ -62,7 +62,7 @@
                                         <?= ucfirst($m['tipo_movimiento']) ?>
                                     </span>
                                 </td>
-                                <td><?= htmlspecialchars($m['area_destino'] ?? '-') ?></td>
+                                <td><?= htmlspecialchars($m['area_asignada'] ?? $m['area_destino'] ?? '-') ?></td>
                                 <td><?= htmlspecialchars($m['responsable']) ?></td>
                             </tr>
                         <?php endforeach; ?>

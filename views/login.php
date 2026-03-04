@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso - Sintema Higiene</title>
+    <title>SIAC - Sistema Integral de Activos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <style>
@@ -28,7 +28,7 @@
                     <div class="card-body">
                         <div class="text-center mb-4">
                             <i class="bi bi-shield-lock-fill text-primary" style="font-size: 3rem;"></i>
-                            <h3 class="fw-bold mt-2">Sintema Higiene</h3>
+                            <h3 class="fw-bold mt-2">SIAC</h3>
                             <p class="text-muted">Inicie sesión para continuar</p>
                         </div>
 
@@ -39,7 +39,8 @@
                             </div>
                         <?php endif; ?>
 
-                        <form action="login.php" method="POST">
+                        <form action="validar_auth.php" method="POST">
+                            <?php require_once 'helpers/CsrfHelper.php'; echo CsrfHelper::tokenField(); ?>
                             <div class="form-floating mb-3">
                                 <input type="text" name="cedula" class="form-control border-0 bg-light" id="cedula" placeholder="Cédula" required>
                                 <label for="cedula">Cédula de Identidad</label>

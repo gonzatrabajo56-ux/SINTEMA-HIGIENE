@@ -21,8 +21,8 @@ class BienNoPerecedero {
 
         public function create(array $data): int {
         $stmt = $this->pdo->prepare("INSERT INTO bienes_no_perecederos
-            (numero_bien, descripcion, marca, modelo, color, serial, ubicacion_exacta, estado, fecha_ingreso, fecha_registro)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
+            (numero_bien, descripcion, marca, modelo, color, serial, ubicacion_exacta, area_asignada, responsable, estado, fecha_ingreso, fecha_registro)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
         
         return (int) $stmt->execute([
             $data['numero_bien'],
@@ -32,13 +32,20 @@ class BienNoPerecedero {
             $data['color'] ?? null,
             $data['serial'] ?? null,
             $data['ubicacion_exacta'] ?? null,
+            $data['area_asignada'] ?? null,
+            $data['responsable'] ?? null,
             $data['estado'] ?? 'disponible',
-            $data['fecha_ingreso'] ?? date('Y-m-d') // Usar el campo de fecha corregido
+            $data['fecha_ingreso'] ?? date('Y-m-d')
         ]);
     }
     public function updateEstado(int $id, string $estado): void {
         $stmt = $this->pdo->prepare("UPDATE bienes_no_perecederos SET estado = ? WHERE id = ?");
         $stmt->execute([$estado, $id]);
+    }
+
+    public function updateAreaYEstado(int $id, ?string $area, ?string $responsable, string $estado): void {
+        $stmt = $this->pdo->prepare("UPDATE bienes_no_perecederos SET area_asignada = ?, responsable = ?, estado = ? WHERE id = ?");
+        $stmt->execute([$area, $responsable, $estado, $id]);
     }
 
     public function update(int $id, array $data): void {

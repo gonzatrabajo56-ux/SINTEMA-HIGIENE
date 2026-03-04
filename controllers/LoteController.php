@@ -17,6 +17,11 @@ class LoteController {
         return ['lotes' => $lotes];
     }
     public function store(array $data): void {
+        require_once 'helpers/CsrfHelper.php';
+        if (!CsrfHelper::validateToken($data['csrf_token'] ?? '')) {
+            die("Token CSRF inválido");
+        }
+        
         $producto = trim($data['producto']);
         $cantidad = (float) $data['cantidad'];
         $unidad = $data['unidad'];
@@ -54,6 +59,11 @@ class LoteController {
     }
 
     public function registerSalida(array $data): void {
+        require_once 'helpers/CsrfHelper.php';
+        if (!CsrfHelper::validateToken($data['csrf_token'] ?? '')) {
+            die("Token CSRF inválido");
+        }
+        
         $lote_id = (int) $data['lote_id'];
         $cantidad = (float) $data['cantidad_uso'];
         $area = $data['area'];

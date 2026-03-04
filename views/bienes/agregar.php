@@ -8,6 +8,7 @@
             </div>
             <div class="card-body p-4 p-md-5">
                 <form action="index.php?page=bienes&action=store" method="POST">
+                    <?php require_once 'helpers/CsrfHelper.php'; echo CsrfHelper::tokenField(); ?>
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="form-floating">
@@ -23,7 +24,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input type="text" name="marca" class="form-control border-0 bg-light" id="marca" placeholder="Ej: Dell">
+                                <input type="text" name="marca" class="form-control border-0 bg-light" id="marca" placeholder="Ej: Dell">ahora quiero que las vistas sean profecionales y frescas con movimi
                                 <label for="marca">Marca</label>
                             </div>
                         </div>
@@ -43,6 +44,23 @@
                             <div class="form-floating">
                                 <input type="text" name="ubicacion_exacta" class="form-control border-0 bg-light" id="ubic" placeholder="Ej: Oficina 1">
                                 <label for="ubic">Ubicación Exacta</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <select name="area_asignada" class="form-select border-0 bg-light" id="area">
+                                    <option value="">Seleccionar área...</option>
+                                    <?php foreach ($data['areas'] ?? [] as $area): ?>
+                                        <option value="<?= htmlspecialchars($area['nombre']) ?>"><?= htmlspecialchars($area['nombre']) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <label for="area">Área</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" name="responsable" class="form-control border-0 bg-light" id="resp" placeholder="Responsable">
+                                <label for="resp">Responsable</label>
                             </div>
                         </div>
                         <div class="col-md-6">

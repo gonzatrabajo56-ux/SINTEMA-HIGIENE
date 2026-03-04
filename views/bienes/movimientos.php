@@ -11,6 +11,7 @@
             </div>
             <div class="card-body p-4 p-md-5">
                 <form action="index.php?page=bienes&action=storeMovimiento" method="POST">
+                    <?php require_once 'helpers/CsrfHelper.php'; echo CsrfHelper::tokenField(); ?>
                     <input type="hidden" name="bien_id" value="<?= $data['bien']['id'] ?>">
                     
                     <div class="row g-3">
@@ -31,7 +32,13 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input type="text" name="area_destino" class="form-control border-0 bg-light" id="area" placeholder="Área">
+                                <select name="area_destino" class="form-select border-0 bg-light" id="area" required>
+                                    <option value="">Seleccionar área...</option>
+                                    <?php foreach ($data['areas'] ?? [] as $area): ?>
+                                        <option value="<?= htmlspecialchars($area['nombre']) ?>"><?= htmlspecialchars($area['nombre']) ?></option>
+                                    <?php endforeach; ?>
+                                    <option value="Otro">Otro (especificar en observaciones)</option>
+                                </select>
                                 <label for="area">Área / Ubicación</label>
                             </div>
                         </div>

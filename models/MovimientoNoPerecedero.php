@@ -27,7 +27,7 @@ class MovimientoNoPerecedero {
 
     public function getAll(): array {
         $stmt = $this->pdo->query("
-            SELECT m.*, b.numero_bien, b.descripcion, b.marca, b.modelo
+            SELECT m.*, b.numero_bien, b.descripcion, b.marca, b.modelo, b.area_asignada
             FROM movimientos_no_perecederos m
             JOIN bienes_no_perecederos b ON m.bien_id = b.id
             ORDER BY m.fecha_movimiento DESC
@@ -37,7 +37,7 @@ class MovimientoNoPerecedero {
 
     public function getByBien(int $bien_id): array {
         $stmt = $this->pdo->prepare("
-            SELECT m.*, b.numero_bien, b.descripcion
+            SELECT m.*, b.numero_bien, b.descripcion, b.area_asignada
             FROM movimientos_no_perecederos m
             JOIN bienes_no_perecederos b ON m.bien_id = b.id
             WHERE m.bien_id = ?
@@ -49,7 +49,7 @@ class MovimientoNoPerecedero {
 
     public function getByDateRange(string $fecha_inicio, string $fecha_fin): array {
         $stmt = $this->pdo->prepare("
-            SELECT m.*, b.numero_bien, b.descripcion, b.marca, b.modelo
+            SELECT m.*, b.numero_bien, b.descripcion, b.marca, b.modelo, b.area_asignada
             FROM movimientos_no_perecederos m
             JOIN bienes_no_perecederos b ON m.bien_id = b.id
             WHERE DATE(m.fecha_movimiento) BETWEEN ? AND ?
@@ -61,7 +61,7 @@ class MovimientoNoPerecedero {
 
     public function getByTipo(string $tipo): array {
         $stmt = $this->pdo->prepare("
-            SELECT m.*, b.numero_bien, b.descripcion, b.marca, b.modelo
+            SELECT m.*, b.numero_bien, b.descripcion, b.marca, b.modelo, b.area_asignada
             FROM movimientos_no_perecederos m
             JOIN bienes_no_perecederos b ON m.bien_id = b.id
             WHERE m.tipo_movimiento = ?

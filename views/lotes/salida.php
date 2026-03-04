@@ -8,6 +8,7 @@
             </div>
             <div class="card-body p-4 p-md-5">
                 <form action="index.php?page=lotes&action=registerSalida" method="POST">
+                    <?php require_once 'helpers/CsrfHelper.php'; echo CsrfHelper::tokenField(); ?>
                     <input type="hidden" name="lote_id" value="<?= $data['lote']['id'] ?? '' ?>">
                     
                     <div class="form-floating mb-3">
@@ -16,7 +17,12 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="text" name="area" class="form-control border-0 bg-light" id="area" placeholder="Área" required>
+                        <select name="area" class="form-select border-0 bg-light" id="area" required>
+                            <option value="">Seleccionar área...</option>
+                            <?php foreach ($data['areas'] ?? [] as $area): ?>
+                                <option value="<?= htmlspecialchars($area['nombre']) ?>"><?= htmlspecialchars($area['nombre']) ?></option>
+                            <?php endforeach; ?>
+                        </select>
                         <label for="area" class="text-muted">Área de Destino</label>
                     </div>
                     

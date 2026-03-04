@@ -23,6 +23,13 @@
     <?php endif; ?>
 <?php endif; ?>
 
+<?php if (isset($_GET['message'])): ?>
+    <div class="alert alert-danger alert-dismissible fade show shadow-sm mb-4" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i><strong>Error:</strong> <?= htmlspecialchars($_GET['message']) ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<?php endif; ?>
+
 <div class="row">
     <?php if (empty($data['bienes'])): ?>
         <div class="col-12">

@@ -8,14 +8,7 @@ class Lote {
         $this->pdo = $pdo;
     }
 
-    // --- AGREGA O VERIFICA ESTE MÉTODO ---
-    // models/Lote.php
-
-// models/Lote.php
-
-    // models/Lote.php
-
-        public function getAll(): array {
+    public function getAll(): array {
             // Cambiar fecha_ingreso por id o la columna real de esa tabla
             $stmt = $this->pdo->query("SELECT * FROM lotes ORDER BY id DESC");
             return $stmt->fetchAll();
